@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+
+<html lang="en" style=""><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ICSKWT Archives Project</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&amp;family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<style>
+  :root{
+    --surface:#fdfcfb;
+    --surface-dim:#e8e6e5;
+    --surface-container-lowest:#ffffff;
+    --surface-container-low:#f9f8f6;
+    --surface-container:#f2f0ec;
+    --surface-container-high:#ebe8e4;
+    --surface-container-highest:#e4e1dd;
+    --on-surface:#1a1918;
+    --on-surface-variant:#4e4c4b;
+    --inverse-surface:#2b2a29;
+    --inverse-on-surface:#f5f4f2;
+    --outline:#82807e;
+    --outline-variant:#d3d0cd;
+    --primary:#002068;
+    --primary-strong:#003399;
+    --on-primary:#ffffff;
+    --secondary:#bb0014;
+    --secondary-container:#e41f25;
+    --on-secondary:#ffffff;
+    --tertiary:#002f0c;
+    --tertiary-container:#009639;
+    --on-tertiary:#ffffff;
+    --font-display:'Montserrat', sans-serif;
+    --font-body:'Libre Caslon Text', serif;
+    --margin-page: 1rem;
+    --stack-xl: 3rem;
+    --stack-lg: 2.5rem;
+    --stack-md: 1.25rem;
+    --stack-sm: 0.5rem;
+    --ease: cubic-bezier(.22,.61,.36,1);
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+
+  html{scroll-behavior:smooth;}
+
+  body{
+    background:var(--surface);
+    color:var(--on-surface);
+    font-family:var(--font-body);
+    font-size:1.125rem; /* 18px */
+    line-height:1.8;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  img{display:block;max-width:100%;}
+  a{color:inherit; text-decoration: none;}
+
+  .wrap{
+    max-width:1200px;
+    margin:0 auto;
+    padding:0 var(--margin-page);
+  }
+
+  :focus-visible{
+    outline:2px solid var(--primary-strong);
+    outline-offset:4px;
+  }
+
+  /* ---------- Scroll-reveal ---------- */
+  .reveal{
+    opacity:0;
+    transform:translateY(40px);
+    transition:opacity 1.2s var(--ease), transform 1.2s var(--ease);
+  }
+  .reveal.is-visible{opacity:1;transform:none;}
+  .reveal-1{transition-delay:.1s;}
+  .reveal-2{transition-delay:.2s;}
+  .reveal-3{transition-delay:.3s;}
+  .reveal-4{transition-delay:.4s;}
+
+  /* Hero load-in */
+  @keyframes loadUp{
+    from{opacity:0;transform:translateY(30px);}
+    to{opacity:1;transform:none;}
+  }
+  .load-in{
+    opacity:0;
+    animation:loadUp 1.2s var(--ease) forwards;
+  }
+  .load-in-1{animation-delay:.1s;}
+  .load-in-2{animation-delay:.3s;}
+  .load-in-3{animation-delay:.5s;}
+
+  /* ---------- Hero ---------- */
+  .hero{
+    position: relative;
+    padding: 3rem var(--margin-page);
+    background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAZGRGAnBAxEQrGMlSdCFUhWeGRMKvBFvcZ69iFyXLgKy65i0z8y8X2-MuFc_4Tr_YJywvgeaS8iveUJHQauushudd5po8MbusaI6_4wiuFTozEo-cyPIDJEUnDE9gTw6pHZKefjp9_fSClYLj003givgsMbFtCDMQu6MFz-eMRyXv3cQw-veoHbkXO6rNzQuNobO8Gzj043JedFr1nW5Yw-hvZYv55h9w_mC7iLu0vUm54FeVaxCbhbuSvHvk_VxeSfAk');
+    background-size: cover;
+    background-position: center 30%;
+    background-attachment: fixed;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(0, 32, 104, 0.9) 0%, rgba(0, 15, 50, 0.95) 100%);
+  }
+  .hero-intro{
+    position: relative;
+    z-index: 1;
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+    color: var(--on-primary);
+  }
+  .hero-logo {
+    max-width: 280px;
+    margin: 0 auto 1.5rem;
+    background: rgba(255, 255, 255, 0.98);
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  }
+  .hero h1{
+    font-family:var(--font-display);
+    font-weight:800;
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    line-height:1.1;
+    letter-spacing:-0.03em;
+    color:var(--on-primary);
+    margin-bottom:1rem;
+  }
+  .hero p.lede{
+    font-family:var(--font-body);
+    font-size: clamp(1.125rem, 2vw, 1.375rem);
+    line-height:1.6;
+    color:rgba(255,255,255,0.9);
+    max-width: 65ch;
+    margin:0 auto 2rem;
+  }
+  .cta-row{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;}
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:.5rem;
+    font-family:var(--font-display);
+    font-weight:600;
+    font-size:0.875rem;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    padding:1rem 2rem;
+    border-radius: 50px;
+    transition: all .4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .btn-primary{
+    background:var(--secondary-container);
+    color:var(--on-primary);
+    border: 1px solid var(--secondary-container);
+  }
+  .btn-primary:hover{
+    background:var(--secondary);
+    border-color:var(--secondary);
+    transform:translateY(-2px);
+    box-shadow: 0 8px 20px rgba(228, 31, 37, 0.3);
+  }
+  .btn-outline{
+    background:transparent;
+    color:var(--on-primary);
+    border:1px solid rgba(255,255,255,0.4);
+  }
+  .btn-outline:hover{
+    background:rgba(255,255,255,0.05);
+    border-color:var(--on-primary);
+    transform:translateY(-2px);
+  }
+
+  /* ---------- Section shell ---------- */
+  section{padding:var(--stack-xl) var(--margin-page);}
+  .section-head{max-width:800px;margin-bottom:1rem;}
+  .section-head.text-center { margin-left: auto; margin-right: auto; }
+  .section-head .eyebrow-line{
+    font-family:var(--font-display);
+    font-weight:600;
+    font-size:0.75rem;
+    letter-spacing:0.2em;
+    text-transform:uppercase;
+    color:var(--on-surface-variant);
+    margin-bottom:0.5rem;
+    display: block;
+  }
+  .section-head h2{
+    font-family:var(--font-display);
+    font-weight:800;
+    font-size: clamp(2rem, 4vw, 3rem);
+    line-height:1.2;
+    color:var(--primary);
+    letter-spacing:-0.02em;
+    margin-bottom:0.75rem;
+  }
+  .section-head p{
+    font-family:var(--font-body);
+    font-size:1.125rem;
+    color:var(--on-surface-variant);
+    line-height: 1.6;
+  }
+
+  /* ---------- About ---------- */
+  .about{background:var(--surface-container-low);}
+  .about-body{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:1.5rem;
+  }
+  @media(min-width: 992px) {
+    .about-body{
+      grid-template-columns:1.2fr 1fr;
+      gap:1.5rem;
+      align-items:start;
+    }
+  }
+  .about-body .lead-para{
+    font-size:1.125rem;
+    color:var(--on-surface);
+  }
+  .about-body .lead-para::first-letter{
+    font-family:var(--font-display);
+    font-weight:800;
+    font-size:3.5em;
+    line-height:0.8;
+    float:left;
+    padding:0.1em 0.1em 0 0;
+    color:var(--primary);
+  }
+  .holdings-list{
+    background: var(--surface-container-lowest);
+    padding: 1.5rem;
+    border-radius: 4px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.03);
+    border: 1px solid var(--outline-variant);
+  }
+  .holdings-list .label-line{
+    font-family:var(--font-display);
+    font-weight:600;
+    font-size:0.875rem;
+    letter-spacing:0.15em;
+    text-transform:uppercase;
+    color:var(--primary);
+    margin-bottom:1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  .holdings-list .label-line::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--outline-variant);
+  }
+  .holdings-list ul{list-style:none;}
+  .holdings-list li{
+    font-family:var(--font-display);
+    font-weight:700;
+    font-size:1rem;
+    color:var(--on-surface);
+    padding:0.75rem 0;
+    border-bottom:1px solid var(--surface-dim);
+  }
+  .holdings-list li:first-child{padding-top:0;}
+  .holdings-list li:last-child{border-bottom:none; padding-bottom:0;}
+  .holdings-list li span{
+    display:block;
+    font-family:var(--font-body);
+    font-weight:400;
+    font-size:0.875rem;
+    color:var(--on-surface-variant);
+    margin-top:0.25rem;
+    line-height: 1.4;
+  }
+
+  /* ---------- Gallery ---------- */
+  .slideshow-container {
+    border-radius: 8px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    border: 1px solid rgba(0,0,0,0.05);
+  }
+
+  /* ---------- Video section ---------- */
+  .video-section{background:var(--surface);}
+  .video-card{
+    display:flex;
+    flex-direction: column;
+    background:var(--surface-container-lowest);
+    border:1px solid var(--outline-variant);
+    border-radius: 6px;
+    overflow: hidden;
+    transition: all .4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .video-card:hover{
+    border-color:var(--primary);
+    transform:translateY(-4px);
+    box-shadow: 0 12px 30px rgba(0,32,104,0.08);
+  }
+  .video-card-media{
+    position:relative;
+    width:100%;
+    aspect-ratio:16/9;
+    background:var(--surface-dim);
+    overflow:hidden;
+  }
+  .video-card-media img{
+    position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+    transition:transform .8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .video-card:hover .video-card-media img { transform: scale(1.05); }
+  .play-badge{
+    position:absolute;top:50%;left:50%;
+    transform:translate(-50%,-50%);
+    width:48px;height:48px;
+    background:rgba(255,255,255,0.9);
+    border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    transition:all .4s cubic-bezier(0.16, 1, 0.3, 1);
+    backdrop-filter: blur(4px);
+  }
+  .play-badge svg{width:16px;height:16px;fill:var(--primary);margin-left:3px;}
+  .video-card:hover .play-badge{transform:translate(-50%,-50%) scale(1.1);background:#fff;}
+  .video-card-footer{
+    padding:1.25rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+  }
+  .video-card-footer .label{
+    display:inline-block;
+    font-family:var(--font-display);
+    font-weight:600;
+    font-size:0.7rem;
+    letter-spacing:0.15em;
+    text-transform:uppercase;
+    color:var(--secondary-container);
+    margin-bottom:0.5rem;
+  }
+  .playlist-title{
+    font-family:var(--font-display);
+    font-weight:700;
+    font-size:1rem;
+    line-height: 1.3;
+    color:var(--on-surface);
+    margin-bottom: 1rem;
+  }
+  .video-card-footer .text-link{
+    margin-top: auto;
+    align-self: flex-start;
+    font-family:var(--font-display);
+    font-weight:600;
+    font-size:0.8rem;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:var(--primary);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: gap .3s ease;
+  }
+  .video-card:hover .text-link { gap: 0.75rem; }
+
+  /* ---------- Timeline ---------- */
+  .timeline-list {
+    position: relative;
+    padding-left: 2rem;
+  }
+  .timeline-list::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: var(--outline-variant);
+  }
+  .timeline-item {
+    position: relative;
+    padding-bottom: 1rem;
+  }
+  .timeline-item:last-child { padding-bottom: 0; }
+  .timeline-dot {
+    position: absolute;
+    left: -2rem;
+    top: 0.4rem;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--primary);
+    transform: translateX(-4px);
+    box-shadow: 0 0 0 3px var(--surface);
+    transition: background 0.3s ease;
+  }
+  .timeline-item:hover .timeline-dot { background: var(--secondary-container); }
+  .timeline-year {
+    font-family: var(--font-display);
+    color: var(--on-surface-variant);
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.25rem;
+    display: block;
+  }
+  .timeline-title {
+    font-family: var(--font-display);
+    color: var(--primary);
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    line-height: 1.2;
+  }
+  .timeline-desc {
+    color: var(--on-surface-variant);
+    max-width: 65ch;
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+
+  .themes-box {
+    background: var(--surface-container-lowest);
+    border: 1px solid var(--outline-variant);
+    padding: 1.5rem;
+    border-radius: 4px;
+    position: sticky;
+    top: 1rem;
+  }
+
+  /* ---------- Feedback ---------- */
+  .feedback-grid {
+    column-gap: 1.5rem;
+  }
+  .feedback-card {
+    background: var(--surface-container-lowest);
+    padding: 1.5rem;
+    border: 1px solid var(--surface-dim);
+    border-radius: 6px;
+    margin-bottom: 1.5rem;
+    break-inside: avoid;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.02);
+    transition: box-shadow .3s ease;
+  }
+  .feedback-card:hover {
+    box-shadow: 0 8px 24px rgba(0,0,0,0.04);
+  }
+  .feedback-quote {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--on-surface);
+    margin-bottom: 1rem;
+    font-style: italic;
+  }
+  .feedback-author {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--outline);
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .feedback-author::before {
+    content: '';
+    width: 16px;
+    height: 1px;
+    background: var(--outline-variant);
+  }
+
+  /* ---------- Instagram band ---------- */
+  .instagram-band{background:var(--primary);color:var(--on-primary);}
+  .btn-icon-outline {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    padding: 0;
+    border: 1px solid rgba(255,255,255,0.3);
+    background: transparent;
+    color: white;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all .4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .btn-icon-outline:hover {
+    background: white;
+    color: var(--primary);
+    transform: translateY(-4px);
+  }
+
+  /* ---------- Footer ---------- */
+  footer.site-footer{
+    background:var(--inverse-surface);
+    color:var(--outline-variant);
+    padding: 2rem 0 1.5rem;
+  }
+  
+  /* ---------- Responsive ---------- */
+  @media (max-width:860px){
+    section{padding:var(--stack-lg) var(--margin-page);}
+  }
+  @media (max-width:520px){
+    section{padding:var(--stack-md) var(--margin-page);}
+    .timeline-list { padding-left: 1.5rem; }
+    .timeline-dot { left: -1.5rem; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{transition:none !important;animation:none !important;}
+    .reveal, .load-in{opacity:1;transform:none;}
+    .hero { background-attachment: scroll; }
+  }
+</style>
+</head>
+<body>
+<main>
+<section class="hero" id="top" style="padding: 3rem var(--margin-page);">
+<div class="hero-intro"><div class="hero-logo load-in load-in-1">
+<img alt="ICSKWT Archive Project Logo" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAiO09xG-_8pe32Y3mep6isQmLXvZKdLYOqwkh0wJRnB7Y820KWy0rymQMyMyxMtB7AEcfchhHJt5K7sXndnXWFw-hH1AZfl8Ake5KTafMiZmgsWAgw1Bi5cPf-ZHw6C0dWi9G3Lk0nr9-Jz_M02xq1eDDQzT52Qnld70tU0eZr4vptimOP0GHBNgE-Hg4FJDpfAwPQRU_0YiiEeaSCYG9EArJY4AYmB-akWAHwgUKboB7Rx-xu1Hu1x1JgB8nEIZWgs0Y"/>
+</div>
+<h1 class="load-in load-in-2">Preserving the Digital Heartbeat of Indian Central School</h1>
+<p class="lede load-in load-in-2">School memories fade when left unpreserved. The ICSKWT Archives Project serves as a digital museum, ensuring the photographs, videos, and shared history of the Indian Central School community endure for generations.</p>
+<div class="cta-row load-in load-in-3">
+<a class="btn btn-primary" href="#explore">Explore the Collection</a>
+<a class="btn btn-outline" href="https://www.instagram.com/icskwt_archives/" target="_blank">Follow us on Instagram</a>
+</div></div>
+</section>
+<section class="reveal reveal-1 is-visible" id="old-campus-gallery" style="background: var(--surface-container-low);">
+<div class="wrap">
+<div class="section-head text-center">
+<span class="eyebrow-line">SLIDESHOW INTO THE PAST</span>
+<h2 class="">The Old Campus</h2>
+<p class="">A visual journey through the old campus building of Indian Central School.</p>
+</div>
+<div class="slideshow-container" style="position: relative; overflow: hidden; aspect-ratio: 16/10;">
+<div id="main-slide-display" style="width: 100%; height: 100%; display: flex; transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);"><img alt="Old Campus Archival View 1" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBVCs_NrDXAHCiYwu_w4H38VqIIvNAhRGA4jgPWI6-PwEQ8HIYBQVSqsx0vMbY_353CbL-GyvyHOi4isPrnmYUoOvKKnWFW6p2ErkMrLtem6vgcGwKH70I5TmzycbzummovnfNcaRl7hxNr0Szj7sfs1A0JSw3FtryUnQfUwvxBcThD0wsBtQwCVhUquly7MJRWKM-HkhKSyCk8lxJ4Fr2NfiQT_P01tVicUzwATVF0ncq_X0dY7Nzr8_1HYQcSI30NPKo" style="width: 100%; height: 100%; object-fit: cover; flex-shrink: 0;"/><img alt="Old Campus Archival View 2" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCtFEccekqiDGu-B8XeeblxDOyy_ICiaCUjVeWU7rozyCNX-PKsBgjbeG0fQ6PBu4gbJmND3eUZz3ch87dE-8uRm_VC3J6CyYYaYB5yUDvj9jUqPQfCgM4oTm-AzdJ87BJ3BWlAcrtrNgroeDsfj965RjKbt2Se_cVC-5BYygmY9aXijfRl-oYiuvyJoST92tMLyF1Uxu5Tc4U2j0kqHBqhLhSHZJKhBvkDLb5AueUvpkLIUJxkSduGxQySj-CzBoLwZPA" style="width: 100%; height: 100%; object-fit: cover; flex-shrink: 0;"/><img alt="Old Campus Archival View 3" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBQ-7vhH6a9MOtCivV9DQ6dJBpP50oK2NJQQCs51aofFV8x6kRJ-8M58745ocWY6hb98dkfHHvN37SKNPu0ttbb9CVuSmNbjCA65qgC1sQEeDGoam7pReM8Q2I1h3y8cDlpBzeZBUPCipSgVbcAvtfo-LlADfCkoSA2ieltshJWl-XsbZ1SQtxPIH3iMugnKiuV5xLP5u78aBM4fNBeudw6zZujtnGZ_k1lqmbE_1Qxt10_0j0UptUxDVmwe8_qKMmVPYw" style="width: 100%; height: 100%; object-fit: cover; flex-shrink: 0;"/><img alt="Old Campus Archival View 4" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDbttoQGE_hZA_QAO7p_xv5mbg0FfwNyoe34Vde4ViVgrLxj5K9DU819F53rvVJLkW23_afPgdUMBRTX22s7NfJIuwnGaq6ao1V5FLf4jyozF4MO4A4Qy1NGXBoXmuCNZvSeXCeqm6pjjQnWJBUkysBWj3eun-pBFO_-G7u23cpaOvjx_qha5pZNMYXRvoq5WRJ2NPyxgsSCaI6SqZ2kmib8VyRwoZIgSLTgCZgJEAZHON27tc0993DLWG0zUH61tq9p_Y" style="width: 100%; height: 100%; object-fit: cover; flex-shrink: 0;"/><img alt="Old Campus Archival View 5" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD7rldGpegeHvYYVMBUO2fFmai4KjkfbM7c-zPNJPaY00bRetoDveX6EBu96V8OwLpsPkCLyMi5VeWhGUAdLWpdAuLpwCWLUlQds46cPfnshC2W29Ir2Y2j6A1mQTobc22aKb3xhI4V0h6b8hSMpEEpTkqHJJfkjnZ-_ifHRb-hw9LjbarnLIln88y3QiW4tOlfxZMDNJxDwMROPAMkoFjucil0JsYru6fe30wGhOnd8Vpc6xK9Y5LxNUcf9Q1o8JIjXf0" style="width: 100%; height: 100%; object-fit: cover; flex-shrink: 0;"/><img alt="Old Campus Archival View 6" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCPp6rdHVNgtf2UILtzRa6r5-irTokS7UdE5NaBJew1HCU8IJc9h0DZy6DtlzwHy5E2x8hywf_txZV9B9cxjo0EG1VY69cMVHWSp21IRNM988PVCPePwImeuppXilN-ANu_cFL_34UM9PfV_tNb1q0OtLzSF21d2c7vRiSuqmQzjIkU_LSGfuJkMhu6ziwmGGPJvTRBuqR0IB-QUzfFEtRAlk3gDGP5tzR8DG5MW0N5x-2DXvBvBY-PAbrHlVF6AObF2lE" style="width: 100%; height: 100%; object-fit: cover; flex-shrink: 0;"/><img alt="Old Campus Archival View 7" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB4JFLQwXI28lcEGvtLfhVAP_PZEaTa_hteXuJ7xbPiVHLayYt-WMBxKOVWOm-PKBBDiwmJeSFD-0vRlud8zPn1LLxA-K-vnHr4KS48Pg4Lj2o6Ae-VcjywfgqNORU_kqhvOATRA8e-yviVXyub-Kez9US79TAM9DJt87OU11hCpL4jYbAFVLGmhjVUk-upPK0PH0zVX128SCwTpoDGZoEli0RzkIGruZ-sXmv86aOb2d84fGNVVJaHUomNDzxkn0EBjSQ" style="width: 100%; height: 100%; object-fit: cover; flex-shrink: 0;"/><img alt="Old Campus Archival View 8" src="https://lh3.googleusercontent.com/aida-public/AB6AXuABqAQUjaHQG1wnHnTJs8BIBGEOvqXB2CNmvqsbBeUaSyZ9g3UpH3X-O0ynyQ6dJQ5CLaMIzzlClXTPCUbcZJHdk9oKbVmllgtEcQoaw9J72TOmdLfNCU_Q4MRqEJrsnj-BEnsvazl7AYOeuXqEedNroKjHMKmZgGS6Fv73G3nAVzBpzLwXmQ7kikWTdXjjSNSvyGxqKESvdZiyF4wH5kwH3UDhC60d02n0VfI6UCAtPDGkYLgJCUJ0CPzEQ0ZTzZZj9NA" style="width: 100%; height: 100%; object-fit: cover; flex-shrink: 0;"/><img alt="Old Campus Archival View 9" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAF2BW4yherwjIi7Xl_FQiWknF6mX6LZsIQHAFB7lP0OMQPZRM-bkoe3noIx6S86HtNzpXAIekf15Ajt75l2zHULhI7S5PvfMYhH6dPpG-qu0tHikO9W7DtorqXlqjKzI7B0kAsX8cEtBe2cmISL2gH5pVOj-WS4U54hiNEpWbZH9ZgOzXD2j_cUA5MLLEs6oSSPaXcUNf-ji6AFd4pGc1Ub9Is3pg1N8fe7KYNKKXpcIXE79f88jB-FOdvYsN9OXz9VfI" style="width: 100%; height: 100%; object-fit: cover; flex-shrink: 0;"/><img alt="Old Campus Archival View 10" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAufCioCBZTxfPGOngz81djRGuBiZieGJcisNbJ11Oms4cv7dxkUZ3FPGolp96BoY1N-nafs60QpD0LxCgCdvINFlVGY1lPANFSQ0671DL4qYUssleKWc0zn9SYtbxOeT51Oj4_al0WmrSmtzkqbNR0Oq0iMJ3qHax-682DgtIMdcwT5XvaKvFOY7z3MK8pHIeMg6f4Vo4oKxeKjuQKACZC4XRgE1IXChNlCHvq-ZEzbg_htQtsppedrHyGqFaUuPB3s1A" style="width: 100%; height: 100%; object-fit: cover; flex-shrink: 0;"/><img alt="Old Campus Archival View 11" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB9mMmEXzM2SV_TQAuGjdjTGv62qIwY1ejHUuun_EdZi6EMQRigr3imuhEeKEoAlJSguE6oa2GKSWdZhCNfsHCj6OvzbptoPgwinpYMMnr7zM1OJSXhbT194Tu9mpkluYf-Wd-eoj0rmHtAo_x-PwTR4eSOxPL7VrN9m5kXUqOmAeVwlzWpy7gn3NYcWsK12mPJsLXvpVxgW9SKDebQJUaHNE4FmafU_YzNZYMo2kP6aCD_MfM5zkKHn67uH66K67tj3NA" style="width: 100%; height: 100%; object-fit: cover; flex-shrink: 0;"/><img alt="Old Campus Archival View 12" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBkWi-IdwNjY1yji3MVc5RPrrzZvj7XeDF64t-hMd-dteodj0xVTjTKM3b9M0c5v7SfUk2cyf5DVgjLnYZH8g9D2qPOfAfU0vgO0kadpUI6qaW5P4H6gWbSOsPIBrDjnYCud1vS2VhYxX4GyYeJFJAYAER7zUJQE_rY2fFtjHKMIy5dYbtsWMwtjeB-cImM4R2V5WILWitB7rYG3DpcTGwcwounB3tH0N97pDWWFuu_eY9eU_KOZUX6mp9NNsDEL81tP2U" style="width: 100%; height: 100%; object-fit: cover; flex-shrink: 0;"/><img alt="Old Campus Archival View 13" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDBzMZji1Y0gXE0JKrqwMELeLeUlY9F2vyoNVMYaoDj1p5ZHXpRNUouRvDc4BIyW97wp-g051mGCyRvs9Q3Prb2M28-it8l3eCW9AU4aDIaXvwibk48iCk95hfunl-bKIz33nEQ30kbHuiIMbXAsGSv2yTQC29spwuSO_oQegjoHZJnwn1ueICfVw9YlnyemiEVq88ifVk09QKze9gNkvfLjvJ0tLBxIZHycLCsPREgn0m7KYJtPXGEbqn9EokkBbEVeEM" style="width: 100%; height: 100%; object-fit: cover; flex-shrink: 0;"/><img alt="Old Campus Archival View 14" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD_xj2-4dVhNMF-ou7u5t4_9SuvsQRIZ0DzWaXxP1_K40vgGUuxP2RzKBJw3dXLJp-rYQqF2OUFn8GY1qSWhsI4Ss4RBnt-GcBhvXLOwu0UMB8TsghCu0D0Jd3m-ciZIhMXFTlR7qo0pASa7loKO68Ckaku7MIdn5AgNd671Q9dxSEh9XR454T2vfMY0ywxy9kPUwXKUJxEtun6s4jRXyB0N9l6iYfspMSKMC8CkwCwV99vnq_tsOUWd49f2yRP0dsG6aw" style="width: 100%; height: 100%; object-fit: cover; flex-shrink: 0;"/><img alt="Old Campus Archival View 15" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDyRTfNorF_OLdgCuAKkIomFEFuiVYVvTZYxldQQysmP1wnOQokve_QI1cDtdaq0nA4SzLQAy4vIbV1DgyCXnftlXGTNNdMkGOL7nRanAuQ12822bBqq3wchrUrffCQtsM5vXGc-RDoV3tfmwvHY1OJG97Meq5QDagl1tHmGTK4_qruA06sKjOs0qBMPfznKkeLIOKchhMVaRMGtnsaGaFXmjZmjurtO-CByeX0TNcUQ5ACcb3u35JmeprQ4xQ82fAMZz8" style="width: 100%; height: 100%; object-fit: cover; flex-shrink: 0;"/></div>
+<button class="" data-stitch-orig-opacity="0" onclick="const d = document.getElementById('main-slide-display'); const c = document.getElementById('slide-counter'); const current = parseInt(d.dataset.index || 0); const next = (current - 1 + 15) % 15; d.style.transform = `translateX(-${next * 100}%)`; d.dataset.index = next; c.textContent = `${next + 1} / 15`;" onmouseout="this.style.opacity='0'" onmouseover="this.style.opacity='1'" style="position: absolute; left: 0px; top: 0px; bottom: 0px; width: 80px; background: linear-gradient(to right, rgba(0, 0, 0, 0.4), transparent); color: white; border-width: medium; border-style: none; border-color: currentcolor; border-image: none; cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 10; transition: opacity 0.3s;">
+<svg style="width: 32px; height: 32px; fill: currentColor;" viewbox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"></path></svg>
+</button>
+<button class="" data-stitch-orig-opacity="0" onclick="const d = document.getElementById('main-slide-display'); const c = document.getElementById('slide-counter'); const current = parseInt(d.dataset.index || 0); const next = (current + 1) % 15; d.style.transform = `translateX(-${next * 100}%)`; d.dataset.index = next; c.textContent = `${next + 1} / 15`;" onmouseout="this.style.opacity='0'" onmouseover="this.style.opacity='1'" style="position: absolute; right: 0px; top: 0px; bottom: 0px; width: 80px; background: linear-gradient(to left, rgba(0, 0, 0, 0.4), transparent); color: white; border-width: medium; border-style: none; border-color: currentcolor; border-image: none; cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 10; transition: opacity 0.3s; opacity: 0;">
+<svg style="width: 32px; height: 32px; fill: currentColor;" viewbox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg>
+</button>
+<div style="position: absolute; bottom: 1rem; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.7); color: white; padding: 4px 12px; border-radius: 4px; font-family: var(--font-display); font-size: 0.7rem; font-weight: 600; letter-spacing: 0.1em; z-index: 11; pointer-events: none; backdrop-filter: blur(4px);">
+<span class="" id="slide-counter">1 / 15</span>
+</div>
+</div>
+</div>
+</section>
+<section class="video-section" id="explore">
+<div class="wrap reveal reveal-1 is-visible">
+<div class="section-head text-center">
+<span class="eyebrow-line">Explore the initiative</span>
+<h2 class="">Digital archive Exhibitions</h2>
+<p class="">Links to access repositories, collections, albums and playlists carrying archived and almost lost media on Indian Central School</p>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem;">
+<a class="video-card" href="https://www.youtube.com/playlist?list=PL6VGGiDCnl0KRkcfhEf8Gg02s0UV7BsCq" target="_blank">
+<div class="video-card-media">
+<img alt="Archival Video Thumbnail" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA8ZuriQNfaPCKjpvlPGFRlcdsSvkCpymKFuqnMpSy-Zf_Rr9xr37cNPI5wValFfvgK1xsLD-Rqcw1P64WOb9Q2bJGF5aMHSjshYToLZOaCwHYTmNRS__5oO52bbJpYGieMxOjGEdtd8plt3-Ih1MLvFqeW96L5tyRY6TnSGX1udQpdVotaZYizmXEOpAaAK4vBa-T8AgUCZ0BFRCUMKYZxX9oaauSqGpXhvJ3absBsl3EkUAL9jM0gN4_V3_5H6mNc1lY"/>
+<div class="play-badge">
+<svg viewbox="0 0 24 24"><path d="M8 5v14l11-7z"></path></svg>
+</div>
+</div>
+<div class="video-card-footer">
+<span class="label">Video Archive</span>
+<h3 class="playlist-title">YouTube Playlist with Collection of Restored Media of ICS</h3>
+<span class="text-link">View Playlist <span class="">→</span></span>
+</div>
+</a>
+<a class="video-card" href="https://web.archive.org/web/20260000000000*/icskwt.com" target="_blank">
+<div class="video-card-media">
+<img alt="Wayback Machine Screenshot" src="https://lh3.googleusercontent.com/aida-public/AB6AXuASVnPkIPh9r5H2k9FM6I7TUc97jMeXc4_PTYQBHdlP_HQYvLUddFes0xzKY-fbe9uQqt_jrR6Cg41pvZdXnlsO0bHi-VFPzO1Bf3AxrNymMXU5A5VJ2MC4JGF26rlR0HPxtH4PuhtQZkPY4mqCvwg4zEekOPYuCvBU3w8g7APb4Zmiwo5FEUhehr07oRtWy1nU3HTBF8L0NHt9_ZSSa1tn6UpKnOPtHP4zyE18Bz7lAHAHNg-cVmxGrgEhKnJxm5PNVLk" style="object-position: center top;"/>
+</div>
+<div class="video-card-footer">
+<span class="label">Web Archive</span>
+<h3 class="playlist-title">Snapshots of good old icskwt.com</h3>
+<span class="text-link">View Archive <span class="">→</span></span>
+</div>
+</a>
+<a class="video-card" href="https://www.instagram.com/icskwt_archives/" target="_blank">
+<div class="video-card-media">
+<img alt="Instagram Archive Thumbnail" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBVp6E-FEpkxC5wADnmS-ZTqn7E--RtQ_MNH060Db-GziSnkLvitY3HZbgNuKE24ulCzLeBVM6o9rtN3-0ApnLmATGmVNTDifsHM00Rkz6aM-WBzTAKkYozMwaKruhlSRh3lecGuKVTUtCjsP7jxMPwwYZ3KVskBelSmMrz0RM99zaiW-lWUyGZsy5ROQmanZPy6qoJdYilpZkNjTzCw0N7Fn-28em7eHAmp-Ga3DhfzeGhcMuGoxbCmYGHR6lPRgVIBeA"/>
+</div>
+<div class="video-card-footer">
+<span class="label">Instagram Archive</span>
+<h3 class="playlist-title">Increasing Visbility through Reels and Posts</h3>
+<span class="text-link">View IG Profile <span class="">→</span></span>
+</div>
+</a>
+</div>
+</div>
+</section>
+<section class="about" id="about">
+<div class="wrap about-body">
+<div>
+<div class="section-head reveal reveal-1 is-visible">
+<span class="eyebrow-line">About the Archive</span>
+<h2 class="">PRESERVING OUR SHARED HISTORY</h2>
+</div>
+<p class="lead-para reveal reveal-2 is-visible" style="margin-bottom: 0.5rem;">ICSKWT Archives is an independent, non-commercial initiative dedicated to preserving photographs, videos and other media related to Indian Central School, Kuwait. Much of this material exists across old social-media posts, personal devices and other sources, where it can gradually become lost, inaccessible or permanently disappear over time.</p>
+<p class="reveal reveal-2 is-visible" style="font-size: 1rem; color: var(--on-surface-variant);">The project focuses on collecting and preserving school memories, particularly pre-pandemic media, so that photographs and footage documenting the experiences of past generations are not forgotten. It exists solely for preservation, awareness and accessibility, providing the ICS community with a place to discover, revisit and help preserve its shared history.</p>
+</div>
+<div class="holdings-list reveal reveal-3 is-visible">
+<div class="label-line">Collection Highlights</div>
+<ul>
+<li class="">Photo Archives <span class="">Extensive archive of images from 1990s to late 2020s, covering events in both the old as well as the new campus blocks.</span></li>
+<li class="">ICSKWT Archives Playlist<span class="">Dedicated YouTube Playlist with footages from public sources exploring the campus and its unique vibes.</span></li>
+<li class="">Instagram Outreach Programme<span class="">Designed to expand the project's reach among the alumni community, both within Kuwait and internationally.</span></li>
+<li class="">Physical Memorabilia <span class="">Collection of screenshots, documents and other media giving a vivid picture of the school life those days</span></li>
+</ul>
+</div>
+</div>
+</section>
+<section id="history" style="background: var(--surface);">
+<div class="wrap lg:grid lg:grid-cols-[1fr_380px] lg:gap-10">
+<div>
+<div class="section-head reveal reveal-1 is-visible">
+<span class="eyebrow-line">Timeline</span>
+<h2 class="">A Historical Perspective</h2>
+<p class="">Trace the defining eras of Indian Central School. This timeline highlights key periods represented within our current archival holdings.</p>
+</div>
+<div>
+<ul class="timeline-list">
+<li class="timeline-item reveal is-visible">
+<div class="timeline-dot"></div>
+<span class="timeline-year">1994</span>
+<h3 class="timeline-title">The Beginning</h3>
+<p class="timeline-desc">Founded by Mr. Thomas Chandy with founding principal Mrs. Asha Sharma, the school began functioning on 31 August 1994, initially serving students up to Class VIII. The school recorded about 200 students when it came into existence.</p>
+</li>
+<li class="timeline-item reveal is-visible">
+<div class="timeline-dot"></div>
+<span class="timeline-year">1995</span>
+<h3 class="timeline-title">The First Expansion</h3>
+<p class="timeline-desc">Class IX was added in April 1995. The school also became a member of the Council of CBSE Affiliated Schools in the Gulf.</p>
+</li>
+<li class="timeline-item reveal is-visible">
+<div class="timeline-dot"></div>
+<span class="timeline-year">1996</span>
+<h3 class="timeline-title">CBSE Affiliation</h3>
+<p class="timeline-desc">Indian Central School became officially affiliated to CBSE in 1996 and was subsequently upgraded.</p>
+</li>
+<li class="timeline-item reveal is-visible">
+<div class="timeline-dot"></div>
+<span class="timeline-year">1997</span>
+<h3 class="timeline-title">First Class X Board Batch</h3>
+<p class="timeline-desc">The first batch of Class X students appeared for the CBSE Board Examination in March 1997, defining a milestone by achieving a 100% result, with 99.4% securing first class.</p>
+</li>
+<li class="timeline-item reveal is-visible">
+<div class="timeline-dot"></div>
+<span class="timeline-year">1998</span>
+<h3 class="timeline-title">100% Results Continue</h3>
+<p class="timeline-desc">From the second Class X batch in March 1998, the school established its tradition of achieving 100% results year after year.</p>
+</li>
+<li class="timeline-item reveal is-visible">
+<div class="timeline-dot"></div>
+<span class="timeline-year">1999</span>
+<h3 class="timeline-title">Senior Secondary Education Begins</h3>
+<p class="timeline-desc">The transition to a complete senior-secondary institution arrived as the first batch of Class XII students appeared for the CBSE Board Examination with Science and Commerce streams.</p>
+</li>
+<li class="timeline-item reveal is-visible">
+<div class="timeline-dot"></div>
+<span class="timeline-year">2000s</span>
+<h3 class="timeline-title">A Decade of Growth</h3>
+<p class="timeline-desc">An era of expansion saw the school rapidly develop its academic programmes, infrastructure, and an increasing body of student activities.</p>
+</li>
+<li class="timeline-item reveal is-visible">
+<div class="timeline-dot"></div>
+<span class="timeline-year">2006</span>
+<h3 class="timeline-title">End of the Founding Principal Era</h3>
+<p class="timeline-desc">Mrs. Asha Sharma departed after 12 years of foundational leadership at Indian Central School.</p>
+</li>
+<li class="timeline-item reveal is-visible">
+<div class="timeline-dot"></div>
+<span class="timeline-year">2007</span>
+<h3 class="timeline-title">Dr. Shanta Maria James Becomes Principal</h3>
+<p class="timeline-desc">Dr. Shanta Maria James stepped into the role of Principal, inaugurating a new period of institutional growth.</p>
+</li>
+<li class="timeline-item reveal is-visible">
+<div class="timeline-dot"></div>
+<span class="timeline-year">2014</span>
+<h3 class="timeline-title">Twenty Years of ICS</h3>
+<p class="timeline-desc">The school marked its 20th anniversary celebrations, having grown significantly since its inception to serve an expanding student base.</p>
+</li>
+<li class="timeline-item reveal is-visible">
+<div class="timeline-dot"></div>
+<span class="timeline-year">2014–2016</span>
+<h3 class="timeline-title">Academic Distinction</h3>
+<p class="timeline-desc">ICS achieved top rankings in Kuwait in streams such as Biotechnology and Humanities, solidifying its academic reputation.</p>
+</li>
+<li class="timeline-item reveal is-visible">
+<div class="timeline-dot"></div>
+<span class="timeline-year">2016</span>
+<h3 class="timeline-title">Major CBSE Sports Achievements &amp; Science Prominence</h3>
+<p class="timeline-desc">The school continued its strong showing in CBSE cluster events and further elevated its presence in regional science exhibitions.</p>
+</li>
+<li class="timeline-item reveal is-visible">
+<div class="timeline-dot"></div>
+<span class="timeline-year">2017</span>
+<h3 class="timeline-title">New Campus</h3>
+<p class="timeline-desc">Indian Central School moved into a new state-of-the-art building with modern facilities, including smart classrooms, laboratories, indoor sports facilities, swimming pools and other infrastructure.</p>
+</li>
+<li class="timeline-item reveal is-visible">
+<div class="timeline-dot"></div>
+<span class="timeline-year">2017</span>
+<h3 class="timeline-title">A Long Sporting Tradition</h3>
+<p class="timeline-desc">The school celebrated its 16th consecutive CBSE Athletics Championship victory among Kuwait schools.</p>
+</li>
+<li class="timeline-item reveal is-visible">
+<div class="timeline-dot"></div>
+<span class="timeline-year">2018</span>
+<h3 class="timeline-title">Gyanutsav and Innovation</h3>
+<p class="timeline-desc">Major initiatives such as Gyanutsav highlighted the school's commitment to innovation and extensive co-curricular development.</p>
+</li>
+<li class="timeline-item reveal is-visible">
+<div class="timeline-dot"></div>
+<span class="timeline-year">2019</span>
+<h3 class="timeline-title">A New Management Era</h3>
+<p class="timeline-desc">Dar Al-Salam Educational Group took over the management of Indian Central School, beginning a new chapter of administration.</p>
+</li>
+<li class="timeline-item reveal is-visible">
+<div class="timeline-dot"></div>
+<span class="timeline-year">2020</span>
+<h3 class="timeline-title">The Pandemic</h3>
+<p class="timeline-desc">The COVID-19 pandemic necessitated a shift to digital learning, marking the boundary between pre-pandemic archival media and the digital-native activities that followed.</p>
+</li>
+<li class="timeline-item reveal is-visible">
+<div class="timeline-dot"></div>
+<span class="timeline-year">2021</span>
+<h3 class="timeline-title">New Principal</h3>
+<p class="timeline-desc">Mrs. Sujata Sivakrishnan assumed the role of Principal to guide the school through the post-pandemic educational landscape.</p>
+</li>
+<li class="timeline-item reveal is-visible">
+<div class="timeline-dot"></div>
+<span class="timeline-year">2022</span>
+<h3 class="timeline-title">New Educational Initiatives</h3>
+<p class="timeline-desc">The introduction of NIOS and Robotics programs added diverse pathways and modern technological education for the students.</p>
+</li>
+<li class="timeline-item reveal is-visible">
+<div class="timeline-dot"></div>
+<span class="timeline-year">2023</span>
+<h3 class="timeline-title">Continued Growth &amp; Alumni Connections</h3>
+<p class="timeline-desc">The school expanded its reach with growing enrollment and strengthened ties with its international alumni network.</p>
+</li>
+<li class="timeline-item reveal is-visible">
+<div class="timeline-dot"></div>
+<span class="timeline-year">2024</span>
+<h3 class="timeline-title">Three Decades of ICS</h3>
+<p class="timeline-desc">Indian Central School celebrated its 30-year milestone, standing as a large established institution with more than 5,300 students.</p>
+</li>
+<li class="timeline-item reveal is-visible">
+<div class="timeline-dot"></div>
+<span class="timeline-year">2025–Present</span>
+<h3 class="timeline-title">The Continuing Legacy</h3>
+<p class="timeline-desc">The school continues to develop its academic, sporting, and co-curricular programmes under the stewardship of its faculty and management.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="reveal reveal-3 is-visible" style="margin-top: 1rem;">
+<div class="themes-box">
+<h3 class="" style="font-family: var(--font-display); font-weight: 700; font-size: 1rem; color: var(--primary); margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.1em; padding-bottom: 0.5rem; border-bottom: 1px solid var(--outline-variant);">Major Themes</h3>
+<div style="margin-bottom: 1.5rem;">
+<h4 class="" style="font-family: var(--font-display); font-weight: 600; font-size: 0.875rem; color: var(--on-surface); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem;">Scale of Growth</h4>
+<p class="" style="font-family: var(--font-body); font-size: 0.875rem; color: var(--on-surface-variant); line-height: 1.5;">From an initial ~200 students in 1994, the school has expanded to serve over 5,300 students, requiring the move to a larger, state-of-the-art campus in 2017, a move which is frowned upon by many people even today.</p>
+</div>
+<div>
+<h4 class="" style="font-family: var(--font-display); font-weight: 600; font-size: 0.875rem; color: var(--on-surface); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem;">Leadership Transitions</h4>
+<p class="" style="font-family: var(--font-body); font-size: 0.875rem; color: var(--on-surface-variant); line-height: 1.5;">Guided by founding principal Mrs. Asha Sharma, followed by Dr. Shanta Maria James and currently Mrs. Sujata Sivakrishnan, alongside the 2019 management transition to Dar Al-Salam Educational Group.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="feedback" style="background-color: var(--surface-container-low);">
+<div class="wrap">
+<div class="section-head text-center reveal reveal-1 is-visible">
+<span class="eyebrow-line">Wall of Memories</span>
+<h2 class="">Community Feedback</h2>
+<p class="mx-auto" style="max-width: 60ch;">Reflections and memories shared by students, alumni, and community members upon revisiting the archives.</p>
+</div>
+<div class="columns-1 md:columns-2 lg:columns-3 feedback-grid">
+<div class="feedback-card reveal is-visible">
+<p class="feedback-quote">"U have no idea how much I miss this school. I wish I could go back and experience it all again. Ics is always in my heart."</p>
+<div class="feedback-author">Former Student</div>
+</div>
+<div class="feedback-card reveal is-visible">
+<p class="feedback-quote">"Thank you for sharing this. Very nostalgic. The new school looks so different now. Appreciate you for uploading this piece of history for those like me to find and enjoy."</p>
+<div class="feedback-author">Alumni</div>
+</div>
+<div class="feedback-card reveal is-visible">
+<p class="feedback-quote">"uff that next level flashback... nostalgia ✨ also i didn't expect the school song to be this energetic.. while we learnt, it used to feel too dull and low-pitched 😂"</p>
+<div class="feedback-author">Former Student</div>
+</div>
+<div class="feedback-card reveal is-visible">
+<p class="feedback-quote">"This is so nostalgic 🥺✨ I saw all the other ics videos too. You really did a great job by combining all those old ics pics and videos! Really beautiful memories to cherish forever 🌸 I used to regret thinking about not taking more videos of ics 🥺"</p>
+<div class="feedback-author">Alumni</div>
+</div>
+<div class="feedback-card reveal is-visible">
+<p class="feedback-quote">"Well all that joy is lost now 😢😢 nothing is the same just the place is same but different building, different people, different stories and different emotions our world has become a past."</p>
+<div class="feedback-author">Former Student</div>
+</div>
+<div class="feedback-card reveal is-visible">
+<p class="feedback-quote">"To the one who created this....Thankyou for unlocking this part of my memory."</p>
+<div class="feedback-author">Community Member</div>
+</div>
+</div>
+</div>
+</section>
+<section class="instagram-band" id="community" style="padding: var(--stack-lg) var(--margin-page);">
+<div class="wrap reveal reveal-1 is-visible" style="max-width: 800px; text-align: center;">
+<div class="load-in load-in-1">
+<div style="background: rgba(255,255,255,0.95); padding: 1rem; border-radius: 8px; display: inline-block; margin-bottom: 1.5rem; box-shadow: 0 10px 30px rgba(0,0,0,0.15);">
+<img alt="ICSKWT Archive Project Logo" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD5gwAQmEfAe0RthtZb8Iz4b8ACsu2gWuNB1BLHhw7M07lRZ8b8EL8r0Jc3tVtwGiYahXDHMz-YV_nq8M58K9jypoFNUToSqmQU8io-8YYWnjH8sUtqSaan_Zmhi-ni1-JqlRq2UaurWPpeRg3OszJ5FRptYUmAeBfno6uhiaVAIGBkycLNIIM1yQlgNOgkZ2l5wLl-ia6Eu3sDwi3bWAuOBukCdCXDAHeynzTRQAfJwZ54Jeo0Wa1xpU8K0j236ALnjow" style="height: 48px; width: auto;"/>
+</div>
+<span class="" style="color: rgba(255,255,255,0.7); font-family: var(--font-display); font-weight: 600; font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 1rem; display: block;">WANT TO SEE MORE?</span>
+<h2 class="" style="font-family: var(--font-display); font-weight: 800; font-size: clamp(1.75rem, 3.5vw, 2.5rem); line-height: 1.1; margin-bottom: 1rem;">Follow the project</h2>
+<p class="" style="color: rgba(255,255,255,0.8); font-family: var(--font-body); font-size: 1rem; line-height: 1.6; margin-bottom: 1.5rem; max-width: 45ch; margin-left: auto; margin-right: auto;">Follow us on our various profiles to see previous posts, reels and stories related to the school.</p>
+<div style="display: flex; gap: 1rem; justify-content: center;">
+<a class="btn-icon-outline" href="https://www.instagram.com/icskwt_archives/" target="_blank" title="Instagram"><svg fill="currentColor" style="width: 20px; height: 20px;" viewbox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"></path></svg></a>
+<a class="btn-icon-outline" href="https://www.youtube.com/playlist?list=PL6VGGiDCnl0KRkcfhEf8Gg02s0UV7BsCq" target="_blank" title="YouTube"><svg fill="currentColor" style="width: 20px; height: 20px;" viewbox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"></path></svg></a>
+<a class="btn-icon-outline" href="https://www.reddit.com/r/ICSKWTArchivesProject/" target="_blank" title="Reddit"><svg fill="currentColor" style="width: 20px; height: 20px;" viewbox="0 0 24 24"><path d="M12 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0zm5.01 4.744c.688 0 1.25.561 1.25 1.249a1.25 1.25 0 0 1-2.498.051l-2.597-.547-.8 3.747c1.824.07 3.48.632 4.674 1.488.308-.309.73-.491 1.207-.491.968 0 1.754.786 1.754 1.754 0 .716-.435 1.333-1.056 1.597.011.103.011.205.011.308 0 2.209-2.548 4-5.688 4-3.14 0-5.688-1.791-5.688-4 0-.103.011-.205.011-.308a1.741 1.741 0 0 1-1.056-1.597c0-.968.786-1.754 1.754-1.754.463 0 .89.182 1.207.491 1.207-.856 2.85-1.427 4.674-1.488l.856-4.011a.113.113 0 0 1 .137-.091l2.731.599c.115-.285.393-.491.72-.491zm-7.844 6.41a1.053 1.053 0 0 0-1.05 1.05c0 .58.47 1.05 1.05 1.05.58 0 1.05-.47 1.05-1.05 0-.58-.47-1.05-1.05-1.05zm4.833 0c-.58 0-1.05.47-1.05 1.05 0 .58.47 1.05 1.05 1.05s1.05-.47 1.05-1.05c0-.58-.47-1.05-1.05-1.05zm-3.374 2.187c-.114 0-.228.047-.317.136-.319.319-.319.837 0 1.156.876.876 2.267.876 3.142 0 .319-.319.319-.837 0-1.156a.448.448 0 0 0-.633 0c-.159.159-.762.47-1.25.47s-1.091-.311-1.25-.47a.448.448 0 0 0-.317-.136z"></path></svg></a>
+</div>
+</div>
+</div>
+</section>
+</main>
+<footer class="site-footer">
+<div class="wrap text-center" style="max-width: 800px;">
+<p class="" style="font-size: 0.75rem; letter-spacing: 0.02em;">ICSKWT Archives Project is an independent, non-commercial archival initiative and is not officially affiliated with or operated by Indian Central School, Kuwait.</p>
+</div>
+</footer>
+<script>
+  // Simple scroll reveal
+  document.addEventListener("DOMContentLoaded", () => {
+    const reveals = document.querySelectorAll(".reveal");
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          entry.target.classList.add("is-visible");
+        }
+      });
+    }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
+    
+    reveals.forEach(r => observer.observe(r));
+  });
+</script>
+</body></html>
